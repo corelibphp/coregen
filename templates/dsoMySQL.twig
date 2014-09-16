@@ -14,7 +14,7 @@ namespace {{ namespace }}\Data;
  * @since  {{ "now"|date("Y-m-d H:i") }}
  * @author {{ authorName }}  <{{ authorEmail }}>
  */
-class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace }}\Data\{{ moduelName }}DSOInterface
+class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace }}\Data\{{ moduleName }}DSOInterface
 {
 
     /**
@@ -24,7 +24,7 @@ class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace 
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
     public function __construct(\PDO $dbWrite) {
-        parent::__construct($dbWrite, '\{{ namespace }}\Model\{{ moduelName }}BO');
+        parent::__construct($dbWrite, '\{{ namespace }}\Model\{{ moduleName }}BO');
     } // __construct()
 
     /**
