@@ -71,7 +71,7 @@ if ($valid === false) {
 } //if
 
 if (file_exists('./includes/config.php')) {
-
+    $config = include('./includes/config.php');
 } else {
     errorMessage("No config file found in includes/config.php\n\n");
     exit(2);
