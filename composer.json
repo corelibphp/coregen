@@ -1,0 +1,13 @@
+{
+    "name": "corelib/coregen",
+    "authors": [
+        {
+            "name": "Patrick Forget",
+            "email": "patforg@geekpad.ca"
+        }
+    ],
+    "require": {
+        "twig/twig": "1.*",
+        "webtrendi/clapp": "1.*"
+    }
+}
