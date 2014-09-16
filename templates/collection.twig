@@ -1,0 +1,32 @@
+<?php
+/**
+ * Holds a collection of {{ moduleName }}BO
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }}\Model;
+
+/**
+ * Holds a collection of {{ moduleName }}BO
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+class {{ className }} extends \Corelib\Standard\Collection
+{
+
+    /**
+     * class constructor
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function __construct() {
+        parent::__construct('\{{ namespace }}\Model\{{ moduleName }}BO');
+    } // __construct()
+
+} //  {{ className }} class
+
+

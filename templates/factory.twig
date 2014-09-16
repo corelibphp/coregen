@@ -1,0 +1,50 @@
+<?php
+/**
+ * Builds {{ moduleName }} related classes
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }};
+
+use Corelib\Database;
+
+/**
+ * Builds {{ moduleName }} related classes
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+class {{ className }}
+{
+    /**
+     * returns default implementation of Data\{{ moduleName }}DAOInterface
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public static function get{{ moduleName }}DAO() {
+
+        $db = Database\DatabaseFactory::getPDO('read');
+
+        $dao = new Data\{{ moduleName }}DAOMySQL($db);
+
+        return $dao;
+    } // get{{ moduleName }}DAO()
+
+    /**
+     * returns default implementation of {{ moduleName }}DSOInterface
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public static function get{{ moduleName }}DSO() {
+        $db = Database\DatabaseFactory::getPDO('write');
+
+        $dso = new Data\{{ moduleName }}DSOMySQL($db);
+
+        return $dso;
+    } // get{{ moduleName }}DSO()
+
+} //  {{ className }} class

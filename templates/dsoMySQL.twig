@@ -1,0 +1,49 @@
+<?php
+/**
+ * MySQL implementation of {{ moduleName }}DSOInterface
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }}\Data;
+
+/**
+ * MySQL implementation of {{ moduleName }}DSOInterface
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace }}\Data\{{ moduelName }}DSOInterface
+{
+
+    /**
+     * class constructor
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function __construct(\PDO $dbWrite) {
+        parent::__construct($dbWrite, '\{{ namespace }}\Model\{{ moduelName }}BO');
+    } // __construct()
+
+    /**
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function save(\{{ namespace }}\Model\{{ moduleName }}BO $item, $options = array()) {
+        $options['processMap'] = array(
+            'disabled' => array($this, 'boolean'),
+        );
+        $this->commonSave($item, '{{ tableName }}', $options);
+    } // save()
+
+    /**
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function delete($id, $options = array()) {
+        return $this->commonDelete($id, '{{ tableName }}',  $options);
+    } // search()
+
+} //  {{ className }} class

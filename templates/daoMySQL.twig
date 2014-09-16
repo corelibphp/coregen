@@ -1,0 +1,63 @@
+<?php
+/**
+ * MySQL implementation of {{ moduleName }}DAOInterface
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }}\Data;
+
+/**
+ * MySQL implementation of {{ moduleName }}DAOInterface
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+class {{ className }} extends \Corelib\Data\AccessMySQL implements \{{ namespace }}\Data\{{ moduleName }}DAOInterface
+{
+
+    /**
+     * class constructor
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function __construct(\PDO $dbRead) {
+        parent::__construct(
+            $dbRead,
+            '\{{ namespace }}\Model\{{ moduleName }}BO',
+            '\{{ namespace }}\Model\{{ moduleName }}Collection'
+        );
+    } // __construct()
+
+    /**
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function getById($id, $options = array()) {
+        return $this->commonGetById($id, '{{ tableName }}', $options);        
+    } // getById()
+
+    /**
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function search($condition = null, $options = array()) {
+        return $this->commonSearch($condition, '{{ tableName }}',  $options);
+    } // search()
+
+    /**
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    protected function rowFilter($row) {
+
+        if (isset($row['disabled'])) {
+            $row['disabled'] = ((int) $row['disabled'] === 1 ? true : false);
+        } //if
+
+        return $row;
+    } // rowFilter()
+
+} //  {{ className }} class

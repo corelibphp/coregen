@@ -1,0 +1,36 @@
+<?php
+/**
+ * Data access methods for {{ moduleName }}
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }}\Data;
+
+/**
+ * Data access methods for {{ moduleName }}
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+interface {{ moduleName }}DAOInterface
+{
+
+    /**
+     * retreive a single {{ moduleName }}BO by its unique ID
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function getById($id, $options = array());
+
+    /**
+     * retreive a collection of {{ moduleName }}BOs based on search criteria
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function search($condition = null, $options = array());
+
+} //  {{ moduleName }}DAOInterface class

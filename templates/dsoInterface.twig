@@ -1,0 +1,36 @@
+<?php
+/**
+ * Defines method to store and update {{ moduleName }}
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }}\Data;
+
+/**
+ * Defines method to store and update {{ moduleName }}
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+interface {{ moduleName }}DSOInterface
+{
+
+    /**
+     * save and update 
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function save(\{{ namespace }}\Model\{{ moduleName }}BO $item, $options = array());
+
+    /**
+     * delete element
+     *
+     * @since  {{ "now"|date("Y-m-d H:i") }}
+     * @author {{ authorName }}  <{{ authorEmail }}>
+     */
+    public function delete($id, $options = array());
+
+} //  {{ moduleName }}DAOInterface class
