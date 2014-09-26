@@ -1,8 +1,8 @@
 #!/usr/bin/php
 <?php
 
-require_once 'vendor/autoload.php';
-require_once 'includes/functions.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/includes/functions.php';
 
 
 $definitions = new \Clapp\CommandLineArgumentDefinition(array(
@@ -70,8 +70,9 @@ if ($valid === false) {
     exit(2);
 } //if
 
-if (file_exists('./includes/config.php')) {
-    $config = include('./includes/config.php');
+$configFilename = __DIR__ . '/includes/config.php';
+if (file_exists($configFilename)) {
+    $config = include($configFilename);
 } else {
     errorMessage("No config file found in includes/config.php\n\n");
     exit(2);
