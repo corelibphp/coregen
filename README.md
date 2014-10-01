@@ -17,7 +17,10 @@ Create a config.php in the includes dir see sampleConfig.php in that folder
 
 To generate files you go through the  run 
 
+
 ```
+#!bash
+
 $ ./corelibgen.php --name User --dir ~/projects/myapp/lib/MyApp/ --namespace "\MyApp\User" --table user
 
 Created /home/someuser/projects/myapp/lib/MyApp/User/Model/UserCollection.php
