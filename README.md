@@ -5,7 +5,7 @@ Coregen generates corelib files in a consistent way.
 
 ## Install
 
-Install using composer
+Install dependencies using composer
 
 ```
 $composer install
