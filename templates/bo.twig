@@ -1,39 +1,39 @@
 <?php
+/**
+ * {{ moduleName }} Business Object
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+
+namespace {{ namespace }}\Model;
+
+/**
+ * {{ moduleName }} Business Object
+ *
+ * @since  {{ "now"|date("Y-m-d H:i") }}
+ * @author {{ authorName }}  <{{ authorEmail }}>
+ */
+class {{ className }} extends \Corelib\Model\BusinessObject
+{
+
     /**
-     * {{ moduleName }} Business Object
+     * {{ moduleName }} default values and allows properties
      *
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    
-    namespace {{ namespace }}\Model;
-    
-    /**
-     * {{ moduleName }} Business Object
-     *
-     * @since  {{ "now"|date("Y-m-d H:i") }}
-     * @author {{ authorName }}  <{{ authorEmail }}>
-     */
-    class {{ className }} extends \Corelib\Model\BusinessObject
+    protected static function getDefaultValues()
     {
-    
-        /**
-         * {{ moduleName }} default values and allows properties
-         *
-         * @since  {{ "now"|date("Y-m-d H:i") }}
-         * @author {{ authorName }}  <{{ authorEmail }}>
-         */
-        protected static function getDefaultValues() {
-            static $defaultValues = null;
-            if ($defaultValues === null) {
-                $defaultValues = array_merge(parent::getDefaultValues(), array(
-                    'id'   => 0,
-                    '' => '',
-                    'disabled' => false,
-                ));
-            } //if
+        static $defaultValues = null;
+        if ($defaultValues === null) {
+            $defaultValues = array_merge(parent::getDefaultValues(), array(
+                'id'   => 0,
+                '' => '',
+                'disabled' => false,
+            ));
+        } //if
 
-            return $defaultValues;
-        } // getDefaultValues()
-
-    } // {{ className }} class
+        return $defaultValues;
+    } // getDefaultValues()
+}

@@ -23,7 +23,8 @@ class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace 
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public function __construct(\PDO $dbWrite) {
+    public function __construct(\PDO $dbWrite)
+    {
         parent::__construct($dbWrite, '\{{ namespace }}\Model\{{ moduleName }}BO');
     } // __construct()
 
@@ -31,7 +32,8 @@ class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace 
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public function save(\{{ namespace }}\Model\{{ moduleName }}BO $item, $options = array()) {
+    public function save(\{{ namespace }}\Model\{{ moduleName }}BO $item, $options = array())
+    {
         $options['processMap'] = array(
             'disabled' => array($this, 'boolean'),
         );
@@ -42,8 +44,8 @@ class {{ className }} extends \Corelib\Data\StoreMySQL implements \{{ namespace 
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public function delete($id, $options = array()) {
-        return $this->commonDelete($id, '{{ tableName }}',  $options);
+    public function delete($id, $options = array())
+    {
+        return $this->commonDelete($id, '{{ tableName }}', $options);
     } // search()
-
-} //  {{ className }} class
+}
