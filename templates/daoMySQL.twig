@@ -23,7 +23,8 @@ class {{ className }} extends \Corelib\Data\AccessMySQL implements \{{ namespace
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public function __construct(\PDO $dbRead) {
+    public function __construct(\PDO $dbRead)
+    {
         parent::__construct(
             $dbRead,
             '\{{ namespace }}\Model\{{ moduleName }}BO',
@@ -35,23 +36,26 @@ class {{ className }} extends \Corelib\Data\AccessMySQL implements \{{ namespace
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public function getById($id, $options = array()) {
-        return $this->commonGetById($id, '{{ tableName }}', $options);        
+    public function getById($id, $options = array())
+    {
+        return $this->commonGetById($id, '{{ tableName }}', $options);
     } // getById()
 
     /**
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public function search($condition = null, $options = array()) {
-        return $this->commonSearch($condition, '{{ tableName }}',  $options);
+    public function search($condition = null, $options = array())
+    {
+        return $this->commonSearch($condition, '{{ tableName }}', $options);
     } // search()
 
     /**
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    protected function rowFilter($row) {
+    protected function rowFilter($row)
+    {
 
         if (isset($row['disabled'])) {
             $row['disabled'] = ((int) $row['disabled'] === 1 ? true : false);
@@ -59,5 +63,4 @@ class {{ className }} extends \Corelib\Data\AccessMySQL implements \{{ namespace
 
         return $row;
     } // rowFilter()
-
-} //  {{ className }} class
+}
