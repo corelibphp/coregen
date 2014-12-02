@@ -27,7 +27,7 @@ class {{ className }}
     public static function get{{ moduleName }}DAO()
     {
 
-        $dao = null;
+        static $dao = null;
         
         if ($dao === null) {
             $db = Database\DatabaseFactory::getPDO('read');
@@ -46,7 +46,7 @@ class {{ className }}
      */
     public static function get{{ moduleName }}DSO() {
 
-        $dso = null;
+        static $dso = null;
 
         if ($dso === null) {
             $db = Database\DatabaseFactory::getPDO('write');
