@@ -27,9 +27,13 @@ class {{ className }}
     public static function get{{ moduleName }}DAO()
     {
 
-        $db = Database\DatabaseFactory::getPDO('read');
+        $dao = null;
+        
+        if ($dao === null) {
+            $db = Database\DatabaseFactory::getPDO('read');
 
-        $dao = new Data\{{ moduleName }}DAOMySQL($db);
+            $dao = new Data\{{ moduleName }}DAOMySQL($db);
+        } //if
 
         return $dao;
     } // get{{ moduleName }}DAO()
@@ -40,11 +44,15 @@ class {{ className }}
      * @since  {{ "now"|date("Y-m-d H:i") }}
      * @author {{ authorName }}  <{{ authorEmail }}>
      */
-    public static function get{{ moduleName }}DSO()
-    {
-        $db = Database\DatabaseFactory::getPDO('write');
+    public static function get{{ moduleName }}DSO() {
 
-        $dso = new Data\{{ moduleName }}DSOMySQL($db);
+        $dso = null;
+
+        if ($dso === null) {
+            $db = Database\DatabaseFactory::getPDO('write');
+
+            $dso = new Data\{{ moduleName }}DSOMySQL($db);
+        } //if
 
         return $dso;
     } // get{{ moduleName }}DSO()
