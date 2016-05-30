@@ -1,5 +1,6 @@
 {
     "name": "corelib/coregen",
+    "description": "Coregen is a tool to generates corelib models and data classes.",
     "authors": [
         {
             "name": "Patrick Forget",

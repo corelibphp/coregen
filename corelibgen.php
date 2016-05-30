@@ -12,6 +12,11 @@ $definitions = new \Clapp\CommandLineArgumentDefinition(array(
     "namespace|s=s" => "base namespace of classes",
     "table|t=s"     => "MySQL table name",
     "stdout|o"   => "show code to stdout instead of writing files",
+    "bo-only|b"   => "only create BO",
+    "collection-only|c"   => "only create collection",
+    "factory-only|f"   => "only create factory",
+    "dao-only|r"   => "only create DAO",
+    "dso-only|x"   => "only create DSO",
 ));
 
 // Filter arguments based and validate according to definitions
@@ -24,6 +29,11 @@ if ($filter->getParam('help') === true) {
 } //if
 
 $valid = true;
+$boOnly = $filter->getParam("bo-only");
+$collectionOnly = $filter->getParam("collection-only");
+$factoryOnly = $filter->getParam("factory-only");
+$daoOnly = $filter->getParam("dao-only");
+$dsoOnly = $filter->getParam("dso-only");
 
 $name = $filter->getParam("name");
 if ($name === null) {
@@ -98,147 +108,157 @@ $globalTemplateVars = array_merge($config['templateVars'], array(
 /*---------------------------------------------------------------------------*
  *                              BUSINESS OBJECT                              *
  *---------------------------------------------------------------------------*/
-$className = "{$name}BO";
-$filename = "{$namespaceDir}/Model/{$className}.php";
+if ($boOnly || !$collectionOnly && !$factoryOnly && !$daoOnly && !$dsoOnly) {
+    $className = "{$name}BO";
+    $filename = "{$namespaceDir}/Model/{$className}.php";
 
-$code =  $twig->render('bo.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
+    $code =  $twig->render('bo.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
 
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
+    $code = null;
+    unset($code);
 } //if
-$code = null;
-unset($code);
 
 /*---------------------------------------------------------------------------*
  *                               COLLECTION                                  *
  *---------------------------------------------------------------------------*/
-$className = "{$name}Collection";
-$filename = "{$namespaceDir}/Model/{$className}.php";
+if ($collectionOnly || !$boOnly && !$factoryOnly && !$daoOnly && !$dsoOnly) {
+    $className = "{$name}Collection";
+    $filename = "{$namespaceDir}/Model/{$className}.php";
 
-$code =  $twig->render('collection.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
+    $code =  $twig->render('collection.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
 
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
+
+    $code = null;
+    unset($code);
 } //if
-
-$code = null;
-unset($code);
 
 /*---------------------------------------------------------------------------*
  *                                 FACTORY                                   *
  *---------------------------------------------------------------------------*/
-$className = "{$name}Factory";
-$filename = "{$namespaceDir}/{$className}.php";
+if ($factoryOnly || !$boOnly && !$collectionOnly && !$daoOnly && !$dsoOnly) {
+    $className = "{$name}Factory";
+    $filename = "{$namespaceDir}/{$className}.php";
 
-$code =  $twig->render('factory.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
+    $code =  $twig->render('factory.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
 
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
+
+    $code = null;
+    unset($code);
 } //if
 
-$code = null;
-unset($code);
+if ($daoOnly || !$boOnly && !$collectionOnly && !$factoryOnly && !$dsoOnly) {
+    /*---------------------------------------------------------------------------*
+     *                              DAO Interface                                *
+     *---------------------------------------------------------------------------*/
+    $className = "{$name}DAOInterface";
+    $filename = "{$namespaceDir}/Data/{$className}.php";
 
-/*---------------------------------------------------------------------------*
- *                              DAO Interface                                *
- *---------------------------------------------------------------------------*/
-$className = "{$name}DAOInterface";
-$filename = "{$namespaceDir}/Data/{$className}.php";
+    $code =  $twig->render('daoInterface.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
 
-$code =  $twig->render('daoInterface.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
 
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
+    $code = null;
+    unset($code);
+
+    /*---------------------------------------------------------------------------*
+     *                                DAO MySQL                                  *
+     *---------------------------------------------------------------------------*/
+    $className = "{$name}DAOMySQL";
+    $filename = "{$namespaceDir}/Data/{$className}.php";
+
+    $code =  $twig->render('daoMySQL.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
+
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
+
+    $code = null;
+    unset($code);
 } //if
 
-$code = null;
-unset($code);
+if ($dsoOnly || !$boOnly && !$collectionOnly && !$factoryOnly && !$daoOnly) {
+    /*---------------------------------------------------------------------------*
+     *                              DSO Interface                                *
+     *---------------------------------------------------------------------------*/
+    $className = "{$name}DSOInterface";
+    $filename = "{$namespaceDir}/Data/{$className}.php";
 
-/*---------------------------------------------------------------------------*
- *                                DAO MySQL                                  *
- *---------------------------------------------------------------------------*/
-$className = "{$name}DAOMySQL";
-$filename = "{$namespaceDir}/Data/{$className}.php";
+    $code =  $twig->render('dsoInterface.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
 
-$code =  $twig->render('daoMySQL.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
 
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
+    $code = null;
+    unset($code);
+
+    /*---------------------------------------------------------------------------*
+     *                                DSO MySQL                                  *
+     *---------------------------------------------------------------------------*/
+    $className = "{$name}DSOMySQL";
+    $filename = "{$namespaceDir}/Data/{$className}.php";
+
+    $code =  $twig->render('dsoMySQL.twig', array_merge($globalTemplateVars, array(
+        "className" => $className,
+    )));
+
+    if ($outputCode) {
+        echo $code,PHP_EOL;
+    } else {
+        createMissingDir($filename, false);
+        file_put_contents($filename, $code);
+        echo "Created {$filename}", PHP_EOL;
+    } //if
+
+    $code = null;
+    unset($code);
 } //if
-
-$code = null;
-unset($code);
-
-/*---------------------------------------------------------------------------*
- *                              DSO Interface                                *
- *---------------------------------------------------------------------------*/
-$className = "{$name}DSOInterface";
-$filename = "{$namespaceDir}/Data/{$className}.php";
-
-$code =  $twig->render('dsoInterface.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
-
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
-} //if
-
-$code = null;
-unset($code);
-
-/*---------------------------------------------------------------------------*
- *                                DSO MySQL                                  *
- *---------------------------------------------------------------------------*/
-$className = "{$name}DSOMySQL";
-$filename = "{$namespaceDir}/Data/{$className}.php";
-
-$code =  $twig->render('dsoMySQL.twig', array_merge($globalTemplateVars, array(
-    "className" => $className,
-)));
-
-if ($outputCode) {
-    echo $code,PHP_EOL;
-} else {
-    createMissingDir($filename, false);
-    file_put_contents($filename, $code);
-    echo "Created {$filename}", PHP_EOL;
-} //if
-
-$code = null;
-unset($code);
 
 exit(0);
